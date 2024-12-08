@@ -44,8 +44,8 @@ export default function Home() {
             Back to My Jobs
           </Button>
         </div>
-        <div className="flex justify-between px-6">
-          <div className="text-xl font-bold text-muted-foreground">
+        <div className="flex justify-between items-center px-6">
+          <div className="text-3xl font-semibold text-muted-foreground mb-2">
             Posk_UXdesigner_sr001
           </div>
           <div className="font-bold text-muted-foreground">
@@ -57,7 +57,7 @@ export default function Home() {
         <div className="max-w-64 border-black border-2 text-center mt-4">
           <Sidebar candidateData={candidateList} />
         </div>
-        <div className="w-full">
+        <div className="w-full p-4">
           <Main candidateData={candidateList} />
         </div>
       </div>
