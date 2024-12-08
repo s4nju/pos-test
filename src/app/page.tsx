@@ -36,7 +36,7 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full max-w-[1200px]">
+    <div className="w-full max-w-[1200px] m-auto">
       <div>
         <div>
           <Button variant="ghost" className="mb-4">
