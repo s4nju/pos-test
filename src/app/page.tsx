@@ -57,7 +57,7 @@ export default function Home() {
         <div className="max-w-64 border-black border-2 text-center mt-4">
           <Sidebar candidateData={candidateList} />
         </div>
-        <div className="w-full p-4">
+        <div className="w-full p-4 *:w-full">
           <Main candidateData={candidateList} />
         </div>
       </div>

@@ -10,14 +10,14 @@ const Main = () => {
   const { candidateHeatmapData } = useCandidateStore();
 
   return (
-    <Tabs defaultValue="compare" className="w-fit">
-      <TabsList className="flex justify-between">
+    <Tabs defaultValue="compare" className="min-w-full">
+      <TabsList className="flex justify-between w-full">
         <span>
           <TabsTrigger value="compare">Compare View</TabsTrigger>
           <TabsTrigger value="indi">Individual View</TabsTrigger>
           <TabsTrigger value="shortlist">Shortlisted candidates</TabsTrigger>
         </span>
-        <span className="mr-4">
+        <span>
           <Button
             variant="outline"
             className="border-black rounded-none drop-shadow-sm mr-2"
@@ -32,7 +32,7 @@ const Main = () => {
           </Button>
         </span>
       </TabsList>
-      <TabsContent value="compare">
+      <TabsContent value="compare" className="w-full">
         <Button
           variant="outline"
           className="w-32 justify-between text-base border-black rounded-none bg-muted"
