@@ -3,15 +3,19 @@ import { HeatMap } from "@nivo/heatmap";
 const Heatmap = ({ data }) => {
   return (
     <HeatMap
-      height={Math.max(200, 100 * data.length)}
-      width={800}
+      height={Math.max(200, 66 * data.length)}
+      enableGridX
+      enableGridY
+      width={920}
       data={data}
-      margin={{ top: 120, right: 0, bottom: 0, left: 180 }}
+      margin={{ top: 120, right: 80, bottom: 0, left: 180 }}
       valueFormat=">-.2s"
+      xInnerPadding={0.1}
+      yInnerPadding={0.1}
       axisTop={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: -90,
+        tickRotation: -30,
         legend: "",
         legendOffset: 46,
         truncateTickAt: 0,
@@ -27,7 +31,7 @@ const Heatmap = ({ data }) => {
       }}
       colors={{
         type: "sequential",
-        colors: ["#daeddd", "#1b4a23"], // color range
+        colors: ["#fff", "#134d22"], // color range
         minValue: 0,
         maxValue: 10,
       }}

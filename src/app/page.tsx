@@ -39,12 +39,12 @@ export default function Home() {
     <div className="w-full max-w-[1200px]">
       <div>
         <div>
-          <Button variant="ghost">
+          <Button variant="ghost" className="mb-4">
             <ArrowLeft />
             Back to My Jobs
           </Button>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between px-6">
           <div className="text-xl font-bold text-muted-foreground">
             Posk_UXdesigner_sr001
           </div>
