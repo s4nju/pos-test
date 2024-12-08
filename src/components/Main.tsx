@@ -52,8 +52,6 @@ const Main = () => {
       <TabsContent value="shortlist">Coming Soon!</TabsContent>
     </Tabs>
   );
-
-  return <></>;
 };
 
 export default Main;

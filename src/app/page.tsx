@@ -1,5 +1,4 @@
 "use client";
-import useSWR from "swr";
 import { ArrowLeft } from "lucide-react";
 
 import Main from "@/components/Main";
@@ -16,14 +15,7 @@ export interface CandidateDataType {
   phone: string;
 }
 
-// const fetchPeople = (url: string) => fetch(url).then((r) => r.json());
-
 export default function Home() {
-  // const { data: candidateData, isLoading } = useSWR<CandidateDataType[]>(
-  //   "https://forinterview.onrender.com/people",
-  //   fetchPeople
-  // );
-
   const { isLoading, candidateList, initializeCandidateList } =
     useCandidateStore((state) => state);
 
