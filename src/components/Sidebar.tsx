@@ -1,8 +1,9 @@
-import { CircleUser, MinusCircle, PlusCircle } from "lucide-react";
+import Avatar from "boring-avatars";
+import { MinusCircle, PlusCircle } from "lucide-react";
 import { useCandidateStore } from "@/app/store";
 
 const Sidebar = () => {
-  const { candidateList, addCandidate, graphCandidateList, removeCandidate } =
+  const { candidateList, candidateListId, addCandidate, removeCandidate } =
     useCandidateStore();
 
   if (!candidateList) {
@@ -12,23 +13,21 @@ const Sidebar = () => {
   return (
     <div className="border-black">
       <div>
-        <div className="text-lg p-2 border-b-2 border-black">
+        <div className="text-lg p-2 border-b border-black">
           Most recommended
         </div>
         <div className="bg-muted px-4">
           {candidateList.map((candidate) => (
             <div
               key={candidate.id}
-              className="flex justify-between items-center border-b-2 border-border py-2"
+              className="flex justify-between items-center border-b border-border py-2"
             >
-              <CircleUser />
+              <Avatar name={candidate.name} size={24} variant="bauhaus" />
               <div className="text-muted-foreground text-xs font-bold">
                 {candidate.name}
               </div>
               {(() => {
-                const exist = graphCandidateList
-                  .map((item) => item.id)
-                  .includes(candidate.id);
+                const exist = candidateListId.includes(candidate.id);
 
                 if (exist) {
                   return (
@@ -54,7 +53,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <div className="h-8 border-t-2 border-black" />
+      <div className="h-8 border-t border-black" />
     </div>
   );
 };

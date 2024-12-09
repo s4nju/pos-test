@@ -1,29 +1,47 @@
 import { create } from "zustand";
 
-const parseCandidateSkill = (candidateData: any) => {
+const parseCandidateSkill = (candidateList: any[], candidateData: any) => {
   const skillset = candidateData.data.data.skillset;
+  const candidateName = candidateData.name;
 
-  return skillset.map((skill) => ({
-    x: skill.name,
-    y: skill.skills.reduce(
+  const candidateNameAndScore = skillset.map((skill) => ({
+    name: skill.name, // skill name
+    score: skill.skills.reduce(
       (total, sk) => total + sk.pos.reduce((t, p) => t + p.consensus_score, 0),
       0
     ),
   }));
-};
 
-const parseDataForHeatMap = (candidateData: any) => {
-  const response = parseCandidateSkill(candidateData);
+  for (const skill of candidateNameAndScore) {
+    const skillIndex = candidateList.findIndex(
+      (item) => item.id === skill.name
+    );
 
-  return {
-    id: candidateData.name,
-    data: response,
-  };
+    if (skillIndex !== -1) {
+      candidateList[skillIndex].data.push({
+        x: candidateName,
+        y: skill.score,
+      });
+    } else {
+      candidateList.push({
+        id: skill.name,
+        data: [
+          {
+            x: candidateName,
+            y: skill.score,
+          },
+        ],
+      });
+    }
+  }
+
+  return candidateList;
 };
 
 export const useCandidateStore = create((set, get) => ({
   isLoading: true,
   candidateList: [],
+  candidateListId: [],
   graphCandidateList: [],
   candidateHeatmapData: [],
   initializeCandidateList: async () => {
@@ -34,7 +52,9 @@ export const useCandidateStore = create((set, get) => ({
     set({ isLoading: false, candidateList: response });
   },
   addCandidate: async (candidateId: string) => {
-    const graphCandidateList = get().graphCandidateList;
+    const stateData = get();
+    const graphCandidateList = stateData.graphCandidateList;
+    const candidateHeatmapData = stateData.candidateHeatmapData;
 
     const found = graphCandidateList.find((item) => item.id === candidateId);
 
@@ -44,17 +64,18 @@ export const useCandidateStore = create((set, get) => ({
       `https://forinterview.onrender.com/people/${candidateId}`
     ).then((r) => r.json());
 
-    const parsedData = parseDataForHeatMap(response);
+    const parsedData = parseCandidateSkill(candidateHeatmapData, response);
 
     set((state: any) => ({
       ...state,
+      candidateListId: [...state.candidateListId, candidateId],
       graphCandidateList: [...state.graphCandidateList, response],
-      candidateHeatmapData: [...state.candidateHeatmapData, parsedData],
+      candidateHeatmapData: [...parsedData],
     }));
   },
   removeCandidate: (candidateId: string) => {
-    const graphCandidateList = get().graphCandidateList;
-    console.log(candidateId, graphCandidateList);
+    const stateData = get();
+    const graphCandidateList = stateData.graphCandidateList;
 
     const otherCandidates = graphCandidateList.filter(
       (c) => c.id !== candidateId
@@ -63,9 +84,10 @@ export const useCandidateStore = create((set, get) => ({
     set((state) => ({
       ...state,
       graphCandidateList: otherCandidates,
-      candidateHeatmapData: otherCandidates.map((item) =>
-        parseDataForHeatMap(item)
-      ),
+      candidateListId: state.candidateListId.filter((id) => id !== candidateId),
+      candidateHeatmapData: otherCandidates.reduce((acc, item) => {
+        return [...parseCandidateSkill(acc, item)];
+      }, []),
     }));
   },
 }));

@@ -31,7 +31,7 @@ export default function Home() {
     <div className="w-full max-w-[1200px] m-auto">
       <div>
         <div>
-          <Button variant="ghost" className="mb-4">
+          <Button variant="ghost" className="mb-4 text-muted-foreground">
             <ArrowLeft />
             Back to My Jobs
           </Button>
@@ -46,7 +46,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex">
-        <div className="max-w-64 border-black border-2 text-center mt-4">
+        <div className="max-w-64 border border-black  text-center mt-4">
           <Sidebar candidateData={candidateList} />
         </div>
         <div className="w-full p-4 *:w-full">
