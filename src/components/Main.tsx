@@ -17,16 +17,16 @@ const Main = () => {
           <TabsTrigger value="indi">Individual View</TabsTrigger>
           <TabsTrigger value="shortlist">Shortlisted candidates</TabsTrigger>
         </span>
-        <span>
+        <span className="pb-1 mr-3">
           <Button
             variant="outline"
-            className="border-black rounded-none drop-shadow-sm mr-2"
+            className="border-black rounded-none mr-2 shadow-[2px_2px_rgba(0,0,0)] px-3"
           >
             <MoveLeft />
           </Button>
           <Button
             variant="outline"
-            className="border-black rounded-none drop-shadow-sm"
+            className="border-black rounded-none shadow-[2px_2px_rgba(0,0,0)] px-3"
           >
             <MoveRight />
           </Button>

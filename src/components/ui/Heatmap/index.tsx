@@ -7,9 +7,9 @@ const HeatmapComponent = ({ data }) => {
       height={data.length === 1 ? 160 : 120 + 40 * data.length}
       enableGridX
       enableGridY
-      width={data[0].data.length === 1 ? 280 : 230 + 50 * data[0].data.length}
+      width={Math.min(900, 230 + 50 * data[0].data.length)}
       data={data}
-      margin={{ top: 80, right: 80, bottom: 0, left: 160 }}
+      margin={{ top: 80, right: 50, bottom: 0, left: 160 }}
       valueFormat=">-.2s"
       xInnerPadding={0.15}
       yInnerPadding={0.15}
